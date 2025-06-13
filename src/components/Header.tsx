@@ -23,7 +23,7 @@ export default function Header() {
         <span>千寻/{date}</span>
 
         {/* 小屏菜单按钮 */}
-        <button className="menu-button" aria-label="打开菜单">
+        <button className="menu-button" aria-label="打开菜单" onClick={toggleSidebar}>
           ☰
         </button>
 
