@@ -6,7 +6,7 @@ import "./NewsPage.scss";
 import Link from "next/link";
 
 const pageSize: number = 5;
-const totalPages: number = Math.floor(newsList.length / pageSize);
+const totalPages: number = Math.ceil(newsList.length / pageSize);
 
 export default function NewsPage() {
   const [currentPage, setCurrentPage] = useState<number>(1);
