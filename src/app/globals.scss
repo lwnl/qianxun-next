@@ -1,8 +1,7 @@
-@import "tailwindcss";
-
-@import "./base/variables";
-@import "./base/reset";
-@import "./base/typography";
+@use "tailwindcss";
+@use "./base/variables";
+@use "./base/reset";
+@use "./base/typography";
 
 /* global layout */
 .app-container {

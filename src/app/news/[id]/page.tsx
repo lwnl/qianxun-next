@@ -1,38 +1,39 @@
-"use client";
 import { notFound } from "next/navigation";
+import NewsDetailClient from "./NewsDetailClient";
 import { newsList } from "../mockData";
-import { useEffect, useState } from "react";
-import axios from "axios";
 
-export default function NewsDetailPage({ params }: { params: { id: string } }) {
-  const [news, setNews] = useState(() => {
-    const newsId = parseInt(params.id, 10);
-    return newsList.find((news) => news.id === newsId) || null;
-  });
+// 1. 定义预生成的静态路径
+/* 1. generateStaticParams() 的作用
+静态生成（Static Generation）：
+Next.js 会在构建时调用 generateStaticParams()，根据返回的路径列表（如 [{ id: '1' }, { id: '2' }]）预先生成对应的静态页面（如 /news/1, /news/2）。
 
-  useEffect(() => {
-    const fetchContent = async () => {
-      try {
-        const apiUrl = "http://localhost:3000/api/scrape";
-        const res = await axios.get(apiUrl, { params: { url: news?.url } });
-        setNews((prevNews) =>
-          prevNews ? { ...prevNews, content: res.data.content } : prevNews
-        );
-      } catch (error) {
-        console.log("获取内容失败", error);
-      }
-    };
-    if (!news) return;
-    fetchContent();
-  }, [news?.url]);
+这些页面会被编译为 HTML 文件，后续访问时直接返回，无需运行时渲染，性能更高。
+
+运行时行为：
+如果用户访问一个未被预生成的路径（如 /news/999），Next.js 会：
+
+如果 dynamicParams: true（默认）：动态生成该页面（SSR）。
+
+如果 dynamicParams: false：返回 404。 */
+export async function generateStaticParams() {
+  return newsList.map(item => ({
+    id: item.id.toString(), // 必须转换成字符串（URL参数总是字符串）
+  }));
+}
+
+type PageProps = {
+  params: {
+    id: string;
+  };
+};
+
+
+export default async function NewsDetailPage({ params }: PageProps) {
+  
+  const newsId = parseInt(params.id);
+  const news = newsList.find((item) => item.id === newsId);
 
   if (!news) return notFound();
 
-  return (
-    <div className="newsDetail">
-      <h2>{news.title}</h2>
-      <p>日期： {news.createdAt}</p>
-      <div dangerouslySetInnerHTML={{ __html: news.content }}></div>
-    </div>
-  );
+  return <NewsDetailClient news={news} />;
 }
