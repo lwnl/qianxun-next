@@ -18,14 +18,18 @@ const pageSize: number = 10;
 export default function NewsPage() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [newsList, setNewsList] = useState<INews[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchNews = async () => {
+      setLoading(true);
       try {
         const res = await axios.get("/api/news-list");
         setNewsList(res.data.data);
+        setLoading(false);
       } catch (err) {
         console.error("获取新闻列表失败：", err);
+        setLoading(false);
       }
     };
     fetchNews();
@@ -41,16 +45,20 @@ export default function NewsPage() {
     <section className="news-page">
       <div className="news-list">
         <h4>最新要闻</h4>
-        <div className="important-news">
-          {currentNewsList.map((news) => (
-            <div key={news.id}>
-              <Link href={`news/${news.id}`}>
-                <h5>{news.title}</h5>
-              </Link>
-              <p>{news.createdAt}</p>
-            </div>
-          ))}
-        </div>
+        {loading ? (
+          <div>页面加载中...</div>
+        ) : (
+          <div className="important-news">
+            {currentNewsList.map((news) => (
+              <div key={news.id}>
+                <Link href={`news/${news.id}`}>
+                  <h5>{news.title}</h5>
+                </Link>
+                <p>{news.createdAt}</p>
+              </div>
+            ))}
+          </div>
+        )}
 
         <div>
           <span

@@ -1,7 +1,12 @@
-添加数据库，建立schema，model --
-添加seed.ts --
-读取数据库内容 --
+添加数据库，建立schema，model -- ok
 
+添加seed.ts -- ok
+
+读取数据库内容 -- ok
+
+读取单条新闻内容
+加载新闻页面
+ 
 罗马仕深夜正式发停工停产放假通知 上热搜
 https://www.epochtimes.com/gb/25/7/6/n14545781.htm
 特大型中共央企高层换人 原董事长去向未明
