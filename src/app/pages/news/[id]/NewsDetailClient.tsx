@@ -2,17 +2,11 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { INews } from "../page";
 
-type News = {
-  id: number;
-  title: string;
-  createdAt: string;
-  url: string;
-  content?: string;
-};
 
-export default function NewsDetailClient({ news }: { news: News }) {
-  const [fullNews, setFullNews] = useState<News>(news);
+export default function NewsDetailClient({ news }: { news: INews }) {
+  const [fullNews, setFullNews] = useState<INews>(news);
   const [loading, setLoading] = useState(!news.content);
 
   useEffect(() => {
