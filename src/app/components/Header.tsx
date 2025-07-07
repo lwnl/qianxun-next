@@ -29,8 +29,8 @@ export default function Header() {
 
         {/* 大屏导航栏 */}
         <nav className="nav-links">
-          <Link href="/news">中国要闻</Link>
-          <Link href="/videos">精彩视频</Link>
+          <Link href="/pages/news">中国要闻</Link>
+          <Link href="/pages/videos">精彩视频</Link>
         </nav>
 
         {/* 搜索框 */}

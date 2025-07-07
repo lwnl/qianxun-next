@@ -1,16 +1,37 @@
 "use client";
 
-import { newsList } from "./mockData";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import "./NewsPage.scss";
 import Link from "next/link";
 
-const pageSize: number = 5;
-const totalPages: number = Math.ceil(newsList.length / pageSize);
+export interface INews {
+  id: number;
+  title: string;
+  url: string;
+  content: string;
+  createdAt: string;
+}
+
+const pageSize: number = 10;
 
 export default function NewsPage() {
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [newsList, setNewsList] = useState<INews[]>([]);
 
+  useEffect(() => {
+    const fetchNews = async () => {
+      try {
+        const res = await axios.get("/api/news-list");
+        setNewsList(res.data.data);
+      } catch (err) {
+        console.error("获取新闻列表失败：", err);
+      }
+    };
+    fetchNews();
+  }, []);
+
+  const totalPages = Math.ceil(newsList.length / pageSize);
   const currentNewsList = newsList.slice(
     (currentPage - 1) * pageSize,
     currentPage * pageSize
