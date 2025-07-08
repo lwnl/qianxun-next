@@ -51,7 +51,7 @@ export default function NewsPage() {
           <div className="important-news">
             {currentNewsList.map((news) => (
               <div key={news.id}>
-                <Link href={`news/${news.id}`}>
+                <Link href={`news/${news.id}`} target="_blank" rel="noopener noreferrer">
                   <h5>{news.title}</h5>
                 </Link>
                 <p>{news.createdAt}</p>

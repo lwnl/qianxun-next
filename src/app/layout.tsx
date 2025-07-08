@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Header from '@/app/components/Header'
-import Footer from '@/app/components/Footer'
+import Header from "@/app/components/Header";
+import Footer from "@/app/components/Footer";
 
 import "./globals.scss";
 
@@ -16,11 +16,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh">
-      <body
-        className="app-container"
-      >
+      <body className="app-container">
         <Header />
-        {children}
+        <div className="children">{children}</div>
         <Footer />
       </body>
     </html>
