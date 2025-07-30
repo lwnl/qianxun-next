@@ -10,15 +10,15 @@ export default function NewsDetailPage() {
   const [fullNews, setFullNews] = useState<INews | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const params = useParams(); // ✅ 获取参数
-  const id = params?.id as string;
+  const _id = params?._id as string;
 
   useEffect(() => {
-    if (!id) return;
+    if (!_id) return;
 
     async function fetchNews() {
       try {
         setLoading(true);
-        const newsRes = await axios.get(`/api/news/${id}`);
+        const newsRes = await axios.get(`/api/news/${_id}`);
         const news = newsRes.data.data;
         setNews(news);
 
@@ -45,7 +45,7 @@ export default function NewsDetailPage() {
     }
 
     fetchNews();
-  }, [id]);
+  }, [_id]);
 
   return (
     <div className="newsDetail">

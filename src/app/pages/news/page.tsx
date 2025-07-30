@@ -6,7 +6,7 @@ import "./NewsPage.scss";
 import Link from "next/link";
 
 export interface INews {
-  id: number;
+  _id: string;
   title: string;
   url: string;
   content: string;
@@ -50,8 +50,8 @@ export default function NewsPage() {
         ) : (
           <div className="important-news">
             {currentNewsList.map((news) => (
-              <div key={news.id}>
-                <Link href={`news/${news.id}`} target="_blank" rel="noopener noreferrer">
+              <div key={news._id}>
+                <Link href={`news/${news._id}`} target="_blank" rel="noopener noreferrer">
                   <h5>{news.title}</h5>
                 </Link>
                 <p>{news.createdAt}</p>

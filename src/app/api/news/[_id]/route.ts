@@ -4,18 +4,18 @@ import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: { _id: string } }
 ) {
   try {
     await connectDB();
 
-    const id = params.id;
+    const _id = params._id;
 
-    if (!id) {
-      return NextResponse.json({ error: 'id 无效' }, { status: 400 });
+    if (!_id) {
+      return NextResponse.json({ error: '_id 无效' }, { status: 400 });
     }
 
-    const news = await NewsModel.findOne({ id: Number(id) });
+    const news = await NewsModel.findOne({ _id });
 
     if (!news) {
       return NextResponse.json({ error: '找不到该新闻' }, { status: 404 });

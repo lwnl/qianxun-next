@@ -3,7 +3,7 @@ import mongoose from 'mongoose'
 const { Schema, model, models } = mongoose
 
 export interface INews extends Document {
-  id: number,
+  _id: string,
   title: string,
   url: string,
   content: string,
@@ -11,7 +11,6 @@ export interface INews extends Document {
 }
 
 const NewsSchema = new Schema<INews>({
-  id: { type: Number, required: true, unique: true },
   title: { type: String, required: true },
   url: { type: String, required: true, unique: true },
   content: { type: String, default: '' },
