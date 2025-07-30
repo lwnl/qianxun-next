@@ -6,7 +6,9 @@
 
 读取单条新闻内容 --ok
 
-添加新闻
+笔记：next 路由文件存放位置 app/api
+angular :host 样式
+input右对齐技巧
  
 罗马仕深夜正式发停工停产放假通知 上热搜
 https://www.epochtimes.com/gb/25/7/6/n14545781.htm
