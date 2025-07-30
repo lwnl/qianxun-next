@@ -4,7 +4,7 @@ import { extractContent } from '@/app/utils/extractContent';
 
 export const dynamic = 'force-dynamic'; // 确保 API 路由是动态的
 
-export async function POST(req: NextRequest) {
+export async function POST(req: NextRequest ) {
   try {
     const { url } = await req.json();
     
